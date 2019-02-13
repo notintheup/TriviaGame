@@ -15,5 +15,5 @@ Page Layout
   results on complete (answer page-ish)
     correct answer
     message
-    gifipie
+    gifipie (array to line up with each of the answers)
   reset game
