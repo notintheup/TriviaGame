@@ -1,0 +1,11 @@
+.border {
+  border: 5px;
+  border-color: black;
+}
+.container {
+  padding: 20px;
+}
+.row {
+  background-color: purple;
+  padding: 20px;
+}
