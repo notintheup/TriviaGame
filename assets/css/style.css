@@ -1,9 +1,48 @@
+.header {
+  background-image: url("../images/abstract.jpg");
+  height: 250px;
+  
+}
+.container {
+  margin: 10px auto;
+  background-color: rgba(97, 248, 110, 0.705);
+  border: 2px solid #403fd3;
+  border-radius: 10px;
+  height: 200px;
+  width: 60%;
+  text-align: center;
+  padding: 20px;
+  color: rgb(55, 23, 146);
+  font-family: 'Macondo Swash Caps', cursive;
+}
+h1 {
+  font-size: 64px;
+}
+body {
+  background-image: url("../images/abstract.jpg");
+  background-size: cover;
+  font-family: 'Macondo Swash Caps', cursive;
+
+}
+.shadow {
+  background-color: rgba(51, 231, 35, 0.705);
+  color: rgb(55, 23, 146);
+  font-size: 26px;
+  font-family: 'Macondo Swash Caps', cursive;
+
+}
 .border {
   border: 5px;
   border-color: black;
 }
-.container {
-  padding: 20px;
+.wrapper {
+  margin: 10px auto;
+  background-color: rgba(189, 109, 255, 0.7);
+  border: 2px solid #403fd3;
+  border-radius: 10px;
+  height: 500px;
+  width: 60%;
+  text-align: center;
 }
 .row {
   background-color: rgb(85, 19, 85);
@@ -13,5 +52,11 @@
 }
 .btn {
   padding: 10px;
-  margin-top: 10px;
+}
+.question {
+  color: whitesmoke;
+}
+.choiceList {
+  font-size: 24px;
+  color: whitesmoke;
 }

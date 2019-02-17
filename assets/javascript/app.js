@@ -1,61 +1,105 @@
 window.onload = function () {
-  $('.resetButton').click(reset);
-  $('.startButton').click(start);
-};
-// Let's setup the game
-var current = 0;
-var timeElem = document.getElementsByClassName('.timeLeft');
-var timerId = setInterval(count, 1000);
-var questionSpot = document.getElementsByClassName('.question');
-var choiceSpot = document.getElementsByClassName('.choiceList');
-// Let's setup the questions in a object and the answers in an array inside the object. The correct 
-// answer is the number at the end of the array.
-questionList = {
-  'What is the birthplace of Wild Willy? ': ['Man', 'Chesty', 'Burn my Hamm', 'ShortDon', 0],
-  'What is the birthplace of Sexy Sally? ': ['Woman', 'Chesty', 'Burn my Hamm', 'ShortDon', 1],
-  'What is the birthplace of Angry Alan? ': ['Dog', 'Chesty', 'Burn my Hamm', 'ShortDon', 3],
-  'What is the birthplace of Barrel Bob? ': ['Cat', 'Chesty', 'Burn my Hamm', 'ShortDon', 4],
-  'What is the birthplace of Crazy Jay? ': ['Monkey', 'Chesty', 'Burn my Hamm', 'ShortDon', 2],
-};
-// Let's declare some functions
-function count() {
-  time--;
-  var converted = timeConverter(time);
-  $('.timeLeft').text(converted);
-}
-function timeConverter(t) {
-  var minutes = Math.floor(t / 60);
-  var seconds = t - (minutes * 15);
-  if (seconds === 0) {
-    reset();
+  $("#startButton").click(function () {
+    $(".btn").hide();
+  })
+  // setup trivia format for game
+  var questionList = [
+    {
+      ask: "What labor force is in highest demand? ",
+      choice: ["Man", "Chesty", "BurnMyHamm", "ShortDon"],
+      ans: false
+    },
+    {
+      ask: "What is the birthplace of Sad Sally? ",
+      choice: ["Woman", "Chesty", "BurnMyHammy", "ShortDon"],
+      ans: true
+    },
+    {
+      ask: "What is the birthplace of Angry Alan? ",
+      choice: ["Dog", "Chesty", "BurnMyHammer", "ShortDon"],
+      ans: false
+    },
+    {
+      ask: "What is the birthplace of Barrel Bob? ",
+      choice: ["Cat", "Chesty", "BurnMyHamoine", "ShortDon"],
+      ans: false
+    },
+    {
+      ask: (" What is the birthplace of Crazy Jay? "),
+      choice: ["Monkey", "Chesty", "BurnMyHamlet", "TooTimer"],
+      ans: true
+    }
+  ]
+  var timer = 15;
+  var clockRunning = false;
+  var intervalId;
+  var index;
+  var questionSpot = document.getElementsByClassName(".question");
+  var choiceSpot = document.getElementsByClassName(".choiceList");
+  // Let"s declare some functions
+  function loadQuestion() {
+    
+    index = Math.floor(Math.random() * questionList.length);
+    
+    questionSpot = questionList[index];
+    
+    $(".question").text("question goes here  " + questionList.ask);
+    
+    for (var i = 0; i < questionSpot.length; i++) {
+      var userChoice = $("<div>");
+      userChoice.addClass("")
+    }
   }
-  return seconds;
-}
-function reset() {
-  time = 0;
-  loadQuestion();
-}
-function start() {
-  if (!timerId) {
-    intervalId = setInterval(count, 1000);
-    clockRunning = true;
-    loadQuestion();
-  }
-}
-function loadQuestion() {
-  $('.question').text(Object.keys(questionList)[current]);
-}
-function loadAnswers() {
-  var answers = questionList[Object.keys(questionList)[current]];
-  for (var i = 0; i < answers.length - 1; i += 1) {
-    $('.choiceList').text(answers[i]) 
-  }
-}
-function checkAnswer(i, arr) {
+  //click function to select answer and outcomes
+$(".answerchoice").on("click", function () {
+	//grab array position from userGuess
+	userGuess = parseInt($(this).attr("data-guessvalue"));
 
-}
-// Let's do this
-loadQuestion();
-loadAnswers();
-reset();
-start();
+	//correct guess or wrong guess outcomes
+	if (userGuess === pick.answer) {
+		stop();
+		correctCount++;
+		userGuess="";
+		$("#answerblock").html("<p>Correct!</p>");
+		hidepicture();
+
+	} else {
+		stop();
+		wrongCount++;
+		userGuess="";
+		$("#answerblock").html("<p>Wrong! The correct answer is: " + pick.choice[pick.answer] + "</p>");
+		hidepicture();
+	}
+})
+  function start() {
+    if (!clockRunning) {
+      intervalId = setInterval(count, 1000);
+      clockRunning = true;
+    }
+  }
+  function count() {
+    $(".timeLeft").text(timer);
+    timer--;
+  // kill timer
+    if (timer === 0) {
+      stop();
+      $(".timeLeft").text("<p> Boom! </p>")
+    }
+    var converted = timeConverter(timer);
+    $(".timeLeft").text(converted);
+  }
+  function timeConverter(t) {
+    var minutes = Math.floor(t / 60);
+    var seconds = t - (minutes * 15);
+    if (seconds === 0) {}
+    return seconds;
+  }
+  function stop() {
+    clockRunning = false;
+    clearInterval(intervalId);
+
+  }
+  loadQuestion();
+  start();
+};
+
