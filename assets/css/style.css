@@ -5,7 +5,7 @@
 }
 .container {
   margin: 10px auto;
-  background-color: rgba(97, 248, 110, 0.705);
+  background-color: rgba(248, 246, 97, 0.705);
   border: 2px solid #403fd3;
   border-radius: 10px;
   height: 200px;
@@ -25,7 +25,7 @@ body {
 
 }
 .shadow {
-  background-color: rgba(51, 231, 35, 0.705);
+  background-color: rgba(224, 251, 222, 0.705);
   color: rgb(55, 23, 146);
   font-size: 26px;
   font-family: 'Macondo Swash Caps', cursive;
@@ -52,6 +52,8 @@ body {
 }
 .btn {
   padding: 10px;
+  background-color: white;
+  color: black;
 }
 .question {
   color: whitesmoke;
