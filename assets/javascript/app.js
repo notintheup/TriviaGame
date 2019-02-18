@@ -38,17 +38,30 @@ window.onload = function () {
     questionSpot = questionList[index];
     $("#question").text("Question: " + questionSpot.ask);
     for (var i = 0; i < questionList.length; i++) {
-      var userChoice = $("<div>");
-      userChoice.addClass("")
+      var youPick = $.each(questionSpot.choice, function(index, value) {
+        $("<div />", {
+          "text": value
+          }).appendTo("#choiceList");
+      });
+      youPick.addClass("yourChoice");
+      youPick.html(questionSpot.choice);
+      youPick.attr("click-value", i);
+      $("#choiceList").append(youPick);
     }
   }
+
+ 
+
+
+
+
   $("#stop").on("click", stop);
   $("#resume").on("click", run);
   $("#startButton").on("click", function () {
     // $("#startButton").hide();
     loadQuestion();
     run();
-    for(var i = 0; i < questionList.length; i++) {
+    for (var i = 0; i < questionList.length; i++) {
       choiceSpot.push(questionList[i]);
       consolelog(questionList[i]);
     }
@@ -60,20 +73,21 @@ window.onload = function () {
     clockRunning = true;
   }
 
-//timer stop
-function stop() {
-	clockRunning = false;
-	clearInterval(intervalId);
-}
+  //timer stop
+  function stop() {
+    clockRunning = false;
+    clearInterval(intervalId);
+  }
 
-    function decrement() {
-      number--;
-      $("#show-number").html("<h2>" + number + "</h2>");
-      if (number === 0) {
-        stop();
-        alert("Loser!");
-      }
+  function decrement() {
+    number--;
+    $("#show-number").html("<h2>" + number + "</h2>");
+    if (number === 0) {
+      stop();
+      alert("Loser!");
     }
+  }
+
   //click function to select answer and outcomes
   $(".answerchoice").on("click", function () {
     //grab array position from userGuess
