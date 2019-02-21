@@ -1,7 +1,6 @@
 .header {
   background-image: url("../images/abstract.jpg");
   height: 250px;
-  
 }
 .container {
   margin: 10px auto;
@@ -17,6 +16,11 @@
 }
 h1 {
   font-size: 64px;
+}
+#chickenDinner {
+  background-color: rgba(187, 107, 253, 0.589);
+
+  font-size: 86px;
 }
 body {
   background-image: url("../images/abstract.jpg");
@@ -55,10 +59,11 @@ body {
   background-color: white;
   color: black;
 }
-.question {
-  color: whitesmoke;
+#question {
+  color: rgb(31, 0, 109);
 }
-.choiceList {
+#choiceList {
   font-size: 24px;
-  color: whitesmoke;
+  color: rgb(31, 0, 109);
+  cursor: pointer; 
 }

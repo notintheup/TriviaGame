@@ -1,71 +1,76 @@
 window.onload = function () {
-  // array of questions, choices and answers
+  // array of questions, answers and correctAnswers
   var questionList = [{
-      ask: "What % of people 10-29 sleep with their phones? ",
-      choice: ["10%", "30%", "70%", "90%"],
-      ans: 3
-    },
-    {
-      ask: "The larger the signature, the larger the self esteem ",
-      choice: ["True", "False"],
-      ans: 0
-    },
-    {
-      ask: "People who give you the best advice are the ones with the most problems",
-      choice: ["True", "False"],
-      ans: 0
-    },
-    {
-      ask: "Creative people tend to get bored easily? ",
-      choice: ["True", "False"],
-      ans: 0
-    },
-    {
-      ask: (" 90% of the things you cannot say in person you prefer? "),
-      choice: ["Burying", "Tell someone else", "Texting", "Singing"],
-      ans: 2
-    }
-  ]
+      question: "What % of people 10-29 sleep with their phones? ",
+      answers: ["10%", "30%", "70%", "90%"],
+      correctAnswer: 3
+    // },
+    // {
+    //   question: "The larger the signature, the larger the self esteem ",
+    //   answers: ["True", "False"],
+    //   correctAnswer: 0
+    // },
+    // {
+    //   question: "People who give you the best advice are the ones with the most problems",
+    //   answers: ["True", "False"],
+    //   correctAnswer: 0
+    // },
+    // {
+    //   question: "Creative people tend to get bored easily? ",
+    //   answers: ["True", "False"],
+    //   correctAnswer: 0
+    // },
+    // {
+    //   question: (" 90% of the things you cannot say in person you prefer? "),
+    //   answers: ["Burying", "Tell someone else", "Texting", "Singing"],
+    //   correctAnswer: 2
+    // }
+  }]
   var number = 30;
   var intervalId;
   var index;
-  // var questionSpot = document.getElementsByClassName("#question");
-  // var choiceSpot= document.getElementsByClassName("#choiceList");
-
   // Let"s declare some functions
   function loadQuestion() {
     index = Math.floor(Math.random() * questionList.length);
     questionSpot = questionList[index];
-    $("#question").text("Question: " + questionSpot.ask);
-    for (var i = 0; i < questionList.length; i++) {
-      var youPick = $.each(questionSpot.choice, function(index, value) {
-        $("<div />", {
-          "text": value
-          }).appendTo("#choiceList");
-      });
-      youPick.addClass("yourChoice");
-      youPick.html(questionSpot.choice);
+    //Load question in div
+    $("#question").text("Question: " + questionSpot.question);
+    for (var i = 0; i < questionSpot.answers.length; i++) {
+      var youPick = $("<div>");
+      youPick.addClass("#choiceList");
+      youPick.html(questionSpot.answers[i]);
       youPick.attr("click-value", i);
       $("#choiceList").append(youPick);
     }
   }
-
- 
-
-
-
+  $("#choiceList").on("click", function (youPick) {
+    youPick = parseInt($(questionList).attr("click-value"));
+    if ("youPick" === questionList.answer) {
+      stop();
+      $("#chickenDinner").html("<p>Correct! </p>");
+    } else {
+      stop();
+      $("#chickenDinner").html("<p>Wrong! </p>");
+    }
+  })
 
   $("#stop").on("click", stop);
   $("#resume").on("click", run);
   $("#startButton").on("click", function () {
-    // $("#startButton").hide();
     loadQuestion();
     run();
-    for (var i = 0; i < questionList.length; i++) {
-      choiceSpot.push(questionList[i]);
-      consolelog(questionList[i]);
-    }
   })
+  function reset() {
+    $("#reset").hide();
+    $("#answerblock").empty();
+    $("#questionblock").empty();
+    for (var i = 0; i < holder.length; i++) {
+      questionList.push(holder[i]);
+    }
+    runTimer();
+    displayQuestion();
+
+  }
 
   function run() {
     clearInterval(intervalId);
@@ -73,7 +78,6 @@ window.onload = function () {
     clockRunning = true;
   }
 
-  //timer stop
   function stop() {
     clockRunning = false;
     clearInterval(intervalId);
@@ -88,25 +92,4 @@ window.onload = function () {
     }
   }
 
-  //click function to select answer and outcomes
-  $(".answerchoice").on("click", function () {
-    //grab array position from userGuess
-    userGuess = parseInt($(this).attr("data-guessvalue"));
-
-    //correct guess or wrong guess outcomes
-    if (userGuess === pick.answer) {
-      stop();
-      correctCount++;
-      userGuess = "";
-      $("#answerblock").html("<p>Correct!</p>");
-      hidepicture();
-
-    } else {
-      stop();
-      wrongCount++;
-      userGuess = "";
-      $("#answerblock").html("<p>Wrong! The correct answer is: " + pick.choice[pick.answer] + "</p>");
-      hidepicture();
-    }
-  })
 };
