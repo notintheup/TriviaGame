@@ -36,16 +36,16 @@ window.onload = function () {
     //Load question in div
     $("#question").text("Question: " + questionSpot.question);
     for (var i = 0; i < questionSpot.answers.length; i++) {
-      var youPick = $("<div>");
-      youPick.addClass("#choiceList");
-      youPick.html(questionSpot.answers[i]);
-      youPick.attr("click-value", i);
-      $("#choiceList").append(youPick);
+      var a = $("<div>");
+      a.addClass("#choiceList");
+      a.html(questionSpot.answers[i]);
+      a.attr("click-value", i);
+      $("#choiceList").append(a);
     }
   }
-  $("#choiceList").on("click", function (youPick) {
-    youPick = parseInt($(questionList).attr("click-value"));
-    if ("youPick" === questionList.answer) {
+  $("#choiceList").on("click", function (a) {
+    a = parseInt($(questionList).attr("click-value"));
+    if ("a" === questionList.answer) {
       stop();
       $("#chickenDinner").html("<p>Correct! </p>");
     } else {
