@@ -19,21 +19,18 @@ h1 {
 }
 #chickenDinner {
   background-color: rgba(255, 255, 255, 0.589);
-
-  font-size: 86px;
+  font-size: 66px;
 }
 body {
   background-image: url("../images/abstract.jpg");
   background-size: cover;
   font-family: 'Macondo Swash Caps', cursive;
-
 }
 .shadow {
   background-color: rgba(224, 251, 222, 0.705);
   color: rgb(55, 23, 146);
   font-size: 26px;
   font-family: 'Macondo Swash Caps', cursive;
-
 }
 .border {
   border: 5px;
@@ -68,7 +65,16 @@ body {
   cursor: pointer;
   padding-right: 10px;
   padding-left: 10px;
-
+}
+#quit {
+  background-color: rgba(255, 0, 0, 0.541);
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+#reset {
+  background-color: rgba(30, 255, 0, 0.541);
+  padding-bottom: 2px;
+  padding-top: 2px;
 }
 .footer {
   position: fixed;

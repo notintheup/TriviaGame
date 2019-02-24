@@ -30,45 +30,39 @@ var questionList = [{
     image: "assets/images/hand.jpg"
   }
 ]
-var number = 15;
+var number = 30;
 var intervalId;
 var index;
 var correct = 0;
 var wrong = 0;
 //Setup the game
-
 function loadQuestion() {
   index = Math.floor(Math.random() * questionList.length);
   qOne = questionList[index];
   $("#question").empty();
   $("#question").text("Question: " + qOne.question);
   for (var i = 0; i < qOne.answers.length; i++) {
-    var a = $("<button>");
-    a.addClass("pickButt");
-    a.html(qOne.answers[i]);
-    a.attr("click-value", i);
-    $("#choiceList").append(a);
+    var a = $("<button>")
+      .addClass("pickButt")
+      .html(qOne.answers[i])
+      .attr("click-value", i)
+    $("#choiceList").append(a)
   }
 
   //click function to select answer and outcomes
   $(".pickButt").on("click", function () {
-    // youPick = questionList.answers;
     youPick = parseInt($(this).attr("click-value"));
-
     if (youPick === qOne.correctAnswer) {
-      stop();
-      correct++;
-      $("#chickenDinner").html("<p>Correct!</p>")
+      $("#correctCount").html("Good choices: " + correct++)
+      $("#chickenDinner").text("Yup!")
+      $("#show-number").empty()
       reset();
-      // hidepicture();
 
     } else {
-      stop();
-      wrong++;
-      $("#chickenDinner").html("<p>Nope!</p>");
-      $("#ding").html(qOne.correctAnswer)
+      $("#wrongCount").html("Bad choices: " + wrong++)
+      $("#chickenDinner").html("Nope!")
+      $("#show-number").empty()
       reset();
-      // hidepicture();
     }
   })
 }
@@ -76,22 +70,21 @@ function loadQuestion() {
 $("#stop").on("click", stop);
 $("#resume").on("click", run);
 $("#reset").on("click", reset);
-$("#correctCount").html(correct);
-$("#wrongCount").html(wrong);
 $("#startButton").on("click", function () {
   reset();
 })
 
 function reset() {
   $("#choiceList").empty();
-  // $("#chickenDinner").empty();
   $("#question").empty();
   $("#show-number").empty();
+  $("#picPlace").empty();
   run();
   loadQuestion();
-
 }
-
+// function hidePicture() {
+//   $("#picPlace").html("");
+// }
 function run() {
   clearInterval(intervalId);
   intervalId = setInterval(decrement, 1000);
