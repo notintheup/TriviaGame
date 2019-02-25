@@ -30,7 +30,7 @@ var questionList = [{
     image: "assets/images/hand.jpg"
   }
 ]
-var number = 30;
+var number = 10;
 var intervalId;
 var index;
 var correct = 0;
@@ -53,16 +53,16 @@ function loadQuestion() {
   $(".pickButt").on("click", function () {
     youPick = parseInt($(this).attr("click-value"));
     if (youPick === qOne.correctAnswer) {
-      $("#correctCount").html("Good choices: " + correct++)
+      $("#correctCount").text("Good choices: " + ++correct)
       $("#chickenDinner").text("Yup!")
-      $("#show-number").empty()
-      reset();
-
+      stop();
+      hidePicture();
+      setTimeout(reset, 3000);
     } else {
-      $("#wrongCount").html("Bad choices: " + wrong++)
-      $("#chickenDinner").html("Nope!")
-      $("#show-number").empty()
-      reset();
+      $("#wrongCount").text("Bad choices: " + ++wrong)
+      $("#chickenDinner").text("Nope!")
+      stop();
+      setTimeout(reset, 3000);
     }
   })
 }
@@ -77,14 +77,12 @@ $("#startButton").on("click", function () {
 function reset() {
   $("#choiceList").empty();
   $("#question").empty();
-  $("#show-number").empty();
-  $("#picPlace").empty();
   run();
   loadQuestion();
 }
-// function hidePicture() {
-//   $("#picPlace").html("");
-// }
+function hidePicture() {
+  $(".wrapper").append("<img src=" + questionList.image + ">");
+}
 function run() {
   clearInterval(intervalId);
   intervalId = setInterval(decrement, 1000);
@@ -92,8 +90,8 @@ function run() {
 }
 
 function stop() {
-  clockRunning = false;
   clearInterval(intervalId);
+  clockRunning = false;
 }
 
 function decrement() {
@@ -101,6 +99,6 @@ function decrement() {
   $("#show-number").html("<h2>" + number + "</h2>");
   if (number === 0) {
     stop();
-    $(".ding").html(" LOSER! ")
+    $("#ding").text(" LOSER! ");
   }
 }
