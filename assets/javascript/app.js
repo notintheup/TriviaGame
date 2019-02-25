@@ -39,6 +39,9 @@ var wrong = 0;
 function loadQuestion() {
   index = Math.floor(Math.random() * questionList.length);
   qOne = questionList[index];
+  //kill question
+  questionList.splice(index, 1);
+
   $("#question").empty();
   $("#question").text("Question: " + qOne.question);
   for (var i = 0; i < qOne.answers.length; i++) {
@@ -56,13 +59,13 @@ function loadQuestion() {
       $("#correctCount").text("Good choices: " + ++correct)
       $("#chickenDinner").text("Yup!")
       stop();
-      hidePicture();
-      setTimeout(reset, 3000);
+      setTimeout(reset, 1000);
+
     } else {
       $("#wrongCount").text("Bad choices: " + ++wrong)
       $("#chickenDinner").text("Nope!")
       stop();
-      setTimeout(reset, 3000);
+      setTimeout(reset, 1000);
     }
   })
 }
@@ -77,12 +80,11 @@ $("#startButton").on("click", function () {
 function reset() {
   $("#choiceList").empty();
   $("#question").empty();
+  $("#chickenDinner").hide();
   run();
   loadQuestion();
 }
-function hidePicture() {
-  $(".wrapper").append("<img src=" + questionList.image + ">");
-}
+
 function run() {
   clearInterval(intervalId);
   intervalId = setInterval(decrement, 1000);
@@ -100,5 +102,8 @@ function decrement() {
   if (number === 0) {
     stop();
     $("#ding").text(" LOSER! ");
+    $("#choiceList").hide();
+    $("#question").hide();
+    $("#chickenDineer").hide();
   }
 }
