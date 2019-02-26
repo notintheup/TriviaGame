@@ -80,7 +80,7 @@ $("#startButton").on("click", function () {
 function reset() {
   $("#choiceList").empty();
   $("#question").empty();
-  $("#chickenDinner").hide();
+  $("#chickenDinner").empty();
   run();
   loadQuestion();
 }
